@@ -272,6 +272,11 @@
     & svg {
       margin-right: 8px;
     }
+
+    &:hover {
+      color: var(--akcent-color);
+      --svg-fill: var(--akcent-color);
+    }
   }
 
   .mobile-phone-link {
