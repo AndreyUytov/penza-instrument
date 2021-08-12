@@ -3,6 +3,7 @@
   width: 100%;
   padding: 0 16px;
   margin: 0 auto;
+  margin-bottom: 56px;
 
   background-image: url('./../images/fon.png');
   background-position: center;
@@ -125,26 +126,27 @@
     }
 
     & ~ .page-header__contacts-list {
-      position: fixed;
-      top: 56px;
       left: 0px;
-      right: 0px;
-      bottom: 0px;
-
-      padding: 26px 16px 0px 16px;
-
       display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: flex-start;
-
-      background-color: var(--normal-color);
     }
   }
 }
 
 .page-header__contacts-list {
+  position: fixed;
+  top: 56px;
   display: none;
+
+  width: 100%;
+  height: 100%;
+
+  padding: 26px 16px 0px 16px;
+
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+
+  background-color: var(--normal-color);
 }
 
 .contacts-list__item {
@@ -198,6 +200,7 @@
     width: 100%;
     max-width: none;
     padding: 0;
+    margin-bottom: 120px;
 
     display: grid;
     grid-template-columns: 1fr [content]10fr 1fr;
@@ -244,13 +247,18 @@
   }
 
   .page-header__contacts-list {
+    position: static;
+    padding: 0;
     display: flex;
+    flex-direction: row;
+
+    background-color: transparent;
   }
 
   .contacts-list__item {
     margin-bottom: 0px;
     &:not(:last-of-type) {
-      margin-right: 32px;
+      margin-right: 18px;
     }
   }
 

@@ -5,15 +5,10 @@ const $pageHeader = document.querySelector('.page-header')
 const $contactsList = document.querySelector('.page-header__contacts-list')
 
 $menuToggleBtn.addEventListener('click', () => {
-  $menuToggleBtn.classList.toggle('contacts-list__toogle-btn--active')
-
-  $pageHeader.classList.toggle('black-fon')
-
   let scrollToglle = document.body.style.overflow
 
   if (scrollToglle) {
     document.body.style.overflow = ''
-    $contactsList.style.display = 'flex'
     animate({
       duration: 400,
       timing: makeToZero(cubic),
@@ -22,11 +17,13 @@ $menuToggleBtn.addEventListener('click', () => {
       },
     }).then(() => {
       $contactsList.style.left = ''
-      $contactsList.style.display = ''
+
+      $menuToggleBtn.classList.toggle('contacts-list__toogle-btn--active')
+      $pageHeader.classList.toggle('black-fon')
     })
   } else {
     document.body.style.overflow = 'hidden'
-
+    $contactsList.style.display = 'flex'
     animate({
       duration: 400,
       timing: makeToZero(cubic),
@@ -35,6 +32,10 @@ $menuToggleBtn.addEventListener('click', () => {
       },
     }).then(() => {
       $contactsList.style.left = ''
+      $contactsList.style.display = ''
+
+      $menuToggleBtn.classList.toggle('contacts-list__toogle-btn--active')
+      $pageHeader.classList.toggle('black-fon')
     })
   }
 })
