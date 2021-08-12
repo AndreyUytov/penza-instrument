@@ -1,19 +1,28 @@
 .catalog-popup__wrapper {
   display: none;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .catalog-popup {
   position: fixed;
-  top: -100%;
+  top: 100vh;
 
   width: 100%;
-  height: 100vh;
+  height: 90vh;
   padding-bottom: 16px;
 
   display: grid;
   grid-template-rows: auto [list] 1fr;
 
   background-color: #fff;
+  border-radius: 16px;
 }
 
 .catalog-popup__title-wrapper {
@@ -105,14 +114,6 @@
 @media (min-width: 1200px) {
   .catalog-popup__wrapper {
     display: none;
-
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-
-    background-color: rgba(0, 0, 0, 0.5);
   }
 
   .catalog-popup {

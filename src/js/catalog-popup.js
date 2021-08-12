@@ -1,4 +1,4 @@
-import { animate, back, cubic, makeToZero, setupEndValue } from './animate'
+import { animate, cubic, makeToZero, setupEndValue } from './animate'
 
 const popupWrapper = document.querySelector('.catalog-popup__wrapper')
 const popup = popupWrapper.querySelector('.catalog-popup')
@@ -26,7 +26,12 @@ const closePopup = (evt) => {
       duration: 450,
       timing: cubic,
       draw(progress) {
-        popup.style.top = `${setupEndValue(-100, 0, progress)}%`
+        popup.style.top = `${setupEndValue(100, 10, progress)}vh`
+        popupWrapper.style.backgroundColor = `rgba(0,0,0, ${setupEndValue(
+          0,
+          0.7,
+          progress
+        )})`
       },
     }).then(() => {
       document.body.style.overflow = ''
@@ -56,9 +61,14 @@ catalogList.addEventListener('click', (evt) => {
 
   animate({
     duration: 450,
-    timing: makeToZero(back),
+    timing: cubic,
     draw(progress) {
-      popup.style.top = `${setupEndValue(-100, 0, progress)}%`
+      popup.style.top = `${setupEndValue(10, 100, progress)}vh`
+      popupWrapper.style.backgroundColor = `rgba(0,0,0, ${setupEndValue(
+        0.7,
+        0,
+        progress
+      )})`
     },
   })
 

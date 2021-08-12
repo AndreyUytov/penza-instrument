@@ -6,6 +6,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const autoprefixer = require('autoprefixer')
 const cssnano = require('cssnano')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CopyPlugin = require('copy-webpack-plugin')
 
 function generateHtmlPlugins(templateDir) {
   const templateFiles = fs.readdirSync(path.resolve(__dirname, templateDir))
@@ -58,6 +59,9 @@ module.exports = (env) => {
       }),
       new webpack.HotModuleReplacementPlugin(),
       ...htmlPlugins,
+      new CopyPlugin({
+        patterns: [{ from: './src/images/favicon', to: './' }],
+      }),
     ],
 
     module: {

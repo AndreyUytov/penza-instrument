@@ -13,7 +13,7 @@ $menuToggleBtn.addEventListener('click', () => {
       duration: 400,
       timing: makeToZero(cubic),
       draw(progress) {
-        $contactsList.style.left = `${setupEndValue(0, -100, progress)}%`
+        $contactsList.style.left = `${setupEndValue(0, 100, progress)}%`
       },
     }).then(() => {
       $contactsList.style.left = ''
@@ -28,7 +28,7 @@ $menuToggleBtn.addEventListener('click', () => {
       duration: 400,
       timing: makeToZero(cubic),
       draw(progress) {
-        $contactsList.style.left = `${setupEndValue(-100, 0, progress)}%`
+        $contactsList.style.left = `${setupEndValue(100, 0, progress)}%`
       },
     }).then(() => {
       $contactsList.style.left = ''
