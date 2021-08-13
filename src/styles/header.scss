@@ -5,6 +5,9 @@
   margin: 0 auto;
   margin-bottom: 56px;
 
+  display: grid;
+  grid-template-rows: [up-row]auto [title]1fr;
+
   background-image: url('./../images/fon.png');
   background-position: center;
   background-repeat: no-repeat;
@@ -22,6 +25,9 @@
 }
 
 .page-header__up-row {
+  grid-row: up-row;
+  grid-column: 1;
+
   width: 100%;
   margin: 0 auto;
   padding: 11px 0px;
@@ -174,10 +180,11 @@
 }
 
 .page-header__down-row {
-  width: 100%;
-  min-height: 300px;
+  grid-row: up-row / -1;
+  grid-column: 1;
 
-  margin: 0 auto;
+  width: 100%;
+  height: 100%;
 
   display: flex;
   align-items: center;
@@ -204,7 +211,7 @@
 
     display: grid;
     grid-template-columns: 1fr [content]10fr 1fr;
-    grid-template-rows: auto [title]1fr;
+    grid-template-rows: [up-row]auto [title]1fr;
 
     background-image: url('./../images/fon-desctop.png');
     background-position: center;
@@ -269,13 +276,14 @@
     align-items: center;
     justify-content: flex-start;
 
+    transition: all 0.3s ease-in-out;
+
     & svg {
       margin-right: 8px;
     }
 
     &:hover {
       color: var(--akcent-color);
-      --svg-fill: var(--akcent-color);
     }
   }
 
@@ -285,7 +293,6 @@
 
   .page-header__down-row {
     grid-column: content;
-    grid-row: title;
     width: 100%;
   }
 
