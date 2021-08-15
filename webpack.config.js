@@ -18,6 +18,7 @@ function generateHtmlPlugins(templateDir) {
       filename: `${name}.html`,
       template: path.resolve(__dirname, `${templateDir}/${name}.${extension}`),
       inject: true,
+      minify: false,
     })
   })
 }
@@ -157,6 +158,9 @@ module.exports = (env) => {
           use: [
             {
               loader: 'html-loader',
+              options: {
+                minimize: false,
+              },
             },
           ],
         },

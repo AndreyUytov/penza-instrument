@@ -1,19 +1,18 @@
-import { animate, cubic, makeToZero, setupEndValue } from './animate'
+import { animate, cubic, setupEndValue } from './animate'
 
-const popupWrapper = document.querySelector('.catalog-popup__wrapper')
-const popup = popupWrapper.querySelector('.catalog-popup')
-const closePopupBtn = popupWrapper.querySelector('.catalog-popup__close-btn')
-const popupTitle = popupWrapper.querySelector('.catalog-popup__title')
 const catalogList = document.querySelector('.catalog__list')
-const popupList = popupWrapper.querySelector('.catalog-popup__list')
 
-const toolTypeMap = {
-  turning: 'Токарные',
-  milling: 'Фрезерные',
-  boring: 'Сверлильные',
-  threading: 'Резьбонарезные',
-  locksmith: 'Слесарные',
-  abrasive: 'Абразивные',
+let popupWrapper = null
+let popup = null
+let closePopupBtn = null
+let popupList = null
+
+const onPopupListScroll = (evt) => {
+  if (popupList.scrollTop > 5) {
+    popupList.style.boxShadow = 'inset 0px 1px 2px 0px rgba(0, 0, 0, 0.25)'
+  } else {
+    popupList.style.boxShadow = ''
+  }
 }
 
 const closePopup = (evt) => {
@@ -41,6 +40,8 @@ const closePopup = (evt) => {
     })
 
     popupWrapper.removeEventListener('click', closePopup)
+    popupList.removeEventListener('scroll', onPopupListScroll)
+    closePopupBtn.removeEventListener('click', closePopup)
   }
 }
 
@@ -48,10 +49,18 @@ catalogList.addEventListener('click', (evt) => {
   let btn = evt.target.closest('[data-tool-type]')
   if (!btn) return
 
-  let toolType = toolTypeMap[btn.dataset.toolType]
+  let toolType = btn.dataset.toolType
   if (!toolType) return
 
-  popupTitle.textContent = toolType
+  // Ищем popup по id = data-tool-type 
+  popupWrapper = document.getElementById(`${toolType}`)
+
+  if(!popupWrapper) {
+    throw new Error(`Нет каталога с id = ${toolType}`)
+  }
+  popup = popupWrapper.querySelector('.catalog-popup')
+  popupList = popupWrapper.querySelector('.catalog-popup__list')
+  closePopupBtn = popupWrapper.querySelector('.catalog-popup__close-btn')
 
   let bodyWidth = document.body.offsetWidth
   document.body.style.width = `${bodyWidth}px`
@@ -73,14 +82,6 @@ catalogList.addEventListener('click', (evt) => {
   })
 
   popupWrapper.addEventListener('click', closePopup)
-})
-
-closePopupBtn.addEventListener('click', closePopup)
-
-popupList.addEventListener('scroll', (evt) => {
-  if (popupList.scrollTop > 5) {
-    popupList.style.boxShadow = 'inset 0px 1px 2px 0px rgba(0, 0, 0, 0.25)'
-  } else {
-    popupList.style.boxShadow = ''
-  }
+  closePopupBtn.addEventListener('click', closePopup)
+  popupList.addEventListener('scroll', onPopupListScroll)
 })
